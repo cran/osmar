@@ -1,0 +1,42 @@
+export(getElementXML, getBboxXML,
+bbox2coords,
+OSM,Node,Way,Relation,
+getOSMObject,
+plot.OSM, plot.Node, plot.Way,
+findID, findKeyValue, findTime)
+
+S3method(findID, OSM)
+S3method(findID, Node)
+S3method(findID, Way)
+S3method(findID, Relation)
+S3method(print, Relation)
+S3method(print, Way)
+S3method(print, Node)
+S3method(print, OSM)
+S3method(print, summary.Node)
+S3method(print, summary.Way)
+S3method(print, summary.Relation)
+S3method(print, summary.OSM)
+S3method(plot, Node)
+S3method(plot, Way)
+S3method(plot, Relation)
+S3method(plot, OSM)
+S3method(summary, Node) 
+S3method(summary, Way)
+S3method(summary, Relation) 
+S3method(summary, OSM)
+S3method(merge, wayDataFrame)
+S3method(merge, wayMember)
+S3method(merge, relationDataFrame)
+S3method(merge, relationMeta)
+S3method(merge, relationDataFrame)
+S3method(merge, nodeDataFrame)
+S3method(merge, SpatialPointsDataFrame)
+S3method(merge, SpatialLinesDataFrame)
+S3method(merge, Way)
+S3method(merge, Node)
+S3method(merge, Relation)
+S3method(merge, OSM)
+
+import(XML, sp, RCurl)
+importFrom(gtools, smartbind)  
