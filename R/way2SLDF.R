@@ -1,5 +1,5 @@
 way2SLDF <-
-function(XML, nodedata, crs=CRS("+init=epsg:4326")){
+function(XML, nodedata, crs=CRS("+proj=longlat +ellps=WGS84 +datum=WGS84 +no_defs +towgs84=0,0,0")){
 
   stopifnot("XMLNodeSet" %in% class(XML)| "list" %in% class(XML))
   stopifnot(attr(XML, "element")=="way")

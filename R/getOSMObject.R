@@ -1,5 +1,5 @@
 getOSMObject <-
-function(XML, reduced=FALSE, crs=CRS("+init=epsg:4326")){
+function(XML, reduced=FALSE, crs=CRS("+proj=longlat +ellps=WGS84 +datum=WGS84 +no_defs +towgs84=0,0,0")){
  
   if(reduced==TRUE){
     bbox<-formatBbox(XML, borders=TRUE)  

@@ -8,7 +8,7 @@
   This function converts a XML-file by OSM-API into an OSM-Object.
 }
 \usage{
-  getOSMObject(XML, reduced = FALSE, crs = CRS("+init=epsg:4326"))
+  getOSMObject(XML, reduced = FALSE, crs = CRS("+proj=longlat +ellps=WGS84 +datum=WGS84 +no_defs +towgs84=0,0,0"))
 }
 
 \arguments{

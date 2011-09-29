@@ -14,7 +14,7 @@
               in combination with \command{value}}
   \item{value}{character matching the value to be extracted. It can be given alone or
               in combination with\command{key}}
-  \item{found}{logical; if \command{TRUE} displays the found IDs}
+  \item{found}{logical; if \command{TRUE} displays the number of found IDs}
 }
 \details{
   Basically this function searches through the Node, Way and Relation objects in \command{x}

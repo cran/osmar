@@ -14,7 +14,7 @@
   \item{coords}{
     numeric vector of length four which contains edges of the bounding box in 
     decimal latitude and longitude values. The form has to be 
-    \code{c(east longitude, south latitude, west longitude, north latitude)}. 
+    \code{c(west longitude, south latitude, east longitude, north latitude)}. 
   }
   \item{URL}{
     logical. TRUE prints the http request in RConsole
