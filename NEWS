@@ -1,0 +1,14 @@
+
+Changes in osmar version 1.1
+
+  o Refactored package; standalone osmar object, different OSM
+    sources, converter methods to sp and igraph.
+
+  o Roxygenized.
+
+  o Navigation device as demo.
+
+
+Changes in osmar version 1.0
+
+  o Initial version on CRAN.
