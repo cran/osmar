@@ -1,7 +1,6 @@
 \name{bbox}
 \alias{bbox}
 \alias{center_bbox}
-\alias{get_osm_elements}
 \title{Get OSM elements}
 \usage{
   bbox(left, bottom, right, top)
@@ -32,6 +31,6 @@
   specialized elements.
 }
 \seealso{
-  \code{\link{osm_descriptors}} \code{\link{get_osm}}
+  \code{\link{osm_descriptors}}, \code{\link{get_osm}}
 }
 

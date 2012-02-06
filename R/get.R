@@ -10,10 +10,12 @@
 #' Get OSM data as \code{\link{osmar}} object from different sources
 #' by providing a bounding box.
 #'
-#' @param x Data identifier; bounding box or specific element, see
-#'   \code{\link{get_osm_elements}}
+#' @param x Data identifier, e.g., bounding box or specific element;
+#'   see the help page of the used OSM source for a detailed list on
+#'   the supported identifiers
 #' @param source OSM source, e.g., \code{\link{osmsource_api}}
-#' @param ... Passed to the internal \code{get_osm_data}
+#' @param ... Additional arguments suppported by the specific OSM
+#'   source; see corresponding source help page for a detailed list
 #'
 #' @return An \code{\link{osmar}} object
 #'
@@ -27,7 +29,7 @@
 #'   kaufstr <- get_osm(way(3810479))
 #'   }
 #'
-#' @seealso \code{\link{get_osm_elements}},
+#' @seealso \code{\link{bbox}}, \code{\link{osm_descriptors}},
 #'   \code{\link{osmsource_api}}, \code{\link{osmsource_osmosis}}
 #'
 #' @export
@@ -58,10 +60,7 @@ get_osm <- function(x, source = osmsource_api(), ...) {
 #' @param right Maximum longitude
 #' @param top Maximum latitutde
 #'
-#' @seealso \code{\link{osm_descriptors}} \code{\link{get_osm}}
-#'
-#' @rdname get_osm_elements
-#' @aliases get_osm_elements
+#' @seealso \code{\link{osm_descriptors}}, \code{\link{get_osm}}
 #'
 #' @export
 bbox <- function(left, bottom, right, top) {
@@ -76,7 +75,7 @@ bbox <- function(left, bottom, right, top) {
 #' @param width Box width
 #' @param height Box height
 #'
-#' @rdname get_osm_elements
+#' @rdname bbox
 #'
 #' @export
 center_bbox <- function(center_lon, center_lat, width, height) {

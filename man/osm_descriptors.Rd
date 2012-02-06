@@ -58,4 +58,7 @@ relation(1)
 ## Description by condition (*.condition):
   way(attrs(id == 17458))
 }
+\seealso{
+  \code{\link{bbox}}
+}
 

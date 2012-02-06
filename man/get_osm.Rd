@@ -5,13 +5,16 @@
   get_osm(x, source = osmsource_api(), ...)
 }
 \arguments{
-  \item{x}{Data identifier; bounding box or specific
-  element, see \code{\link{get_osm_elements}}}
+  \item{x}{Data identifier, e.g., bounding box or specific
+  element; see the help page of the used OSM source for a
+  detailed list on the supported identifiers}
 
   \item{source}{OSM source, e.g.,
   \code{\link{osmsource_api}}}
 
-  \item{...}{Passed to the internal \code{get_osm_data}}
+  \item{...}{Additional arguments suppported by the
+  specific OSM source; see corresponding source help page
+  for a detailed list}
 }
 \value{
   An \code{\link{osmar}} object
@@ -31,7 +34,7 @@
   }
 }
 \seealso{
-  \code{\link{get_osm_elements}},
+  \code{\link{bbox}}, \code{\link{osm_descriptors}},
   \code{\link{osmsource_api}},
   \code{\link{osmsource_osmosis}}
 }

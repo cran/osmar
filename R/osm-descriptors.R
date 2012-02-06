@@ -8,6 +8,7 @@
 #'
 #' @param object The descriptor; see details
 #'
+#' @seealso \code{\link{bbox}}
 #' @aliases osm_descriptors
 #' @rdname osm_descriptors
 #' @export

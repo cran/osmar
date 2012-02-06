@@ -102,34 +102,37 @@ print.osmar <- function(x, ...) {
 #' @rdname summary.osmar
 #' @S3method summary nodes
 summary.nodes <- function(object, ...) {
-  ret <- list()
+  ret <- list(n = NULL, bbox = NULL, content = NULL,
+              key = NULL, val = NULL, keyval = NULL)
 
   ret$n <- c(nodes = nrow(object$attrs),
              tags = nrow(object$tags))
 
-  ret$bbox <- cbind(lat = range(object$attrs$lat),
-                    lon = range(object$attrs$lon))
-  rownames(ret$bbox) <- c("min", "max")
+  if ( ret$n["nodes"] > 0 ) {
+    ret$bbox <- cbind(lat = range(object$attrs$lat),
+                      lon = range(object$attrs$lon))
+    rownames(ret$bbox) <- c("min", "max")
 
-  ret$content <- sapply(object, names)
+    ret$content <- sapply(object, names)
 
-  ret$key <- sort(table(object$tags$k), decreasing = TRUE)
-  ret$key <- data.frame(Key = names(ret$key),
-                        Freq = unname(ret$key),
-                        stringsAsFactors = FALSE)
-  rownames(ret$key) <- NULL
+    ret$key <- sort(table(object$tags$k), decreasing = TRUE)
+    ret$key <- data.frame(Key = names(ret$key),
+                          Freq = unname(ret$key),
+                          stringsAsFactors = FALSE)
+    rownames(ret$key) <- NULL
 
-  ret$val <- sort(table(object$tags$v), decreasing = TRUE)
-  ret$val <- data.frame(Value = names(ret$val),
-                        Freq = unname(ret$val),
-                        stringsAsFactors = FALSE)
-  rownames(ret$val) <- NULL
+    ret$val <- sort(table(object$tags$v), decreasing = TRUE)
+    ret$val <- data.frame(Value = names(ret$val),
+                          Freq = unname(ret$val),
+                          stringsAsFactors = FALSE)
+    rownames(ret$val) <- NULL
 
-  ret$keyval <- as.data.frame(table(Key = object$tags$k,
-                                    Value = object$tags$v))
-  ret$keyval <- ret$keyval[ret$keyval$Freq > 0, ]
-  ret$keyval <- ret$keyval[order(-ret$keyval$Freq), ]
-  rownames(ret$keyval) <- NULL
+    ret$keyval <- as.data.frame(table(Key = object$tags$k,
+                                      Value = object$tags$v))
+    ret$keyval <- ret$keyval[ret$keyval$Freq > 0, ]
+    ret$keyval <- ret$keyval[order(-ret$keyval$Freq), ]
+    rownames(ret$keyval) <- NULL
+  }
 
   structure(ret, class = c("summary.nodes", class(ret)))
 }
@@ -140,13 +143,19 @@ summary.nodes <- function(object, ...) {
 #' @rdname summary.osmar
 #' @S3method print summary.nodes
 print.summary.nodes <- function(x, max.print = 10, ...) {
-  cat(print_header("osmar$nodes", x$n), "\n\n")
-  cat(print_content("osmar$nodes", x$content), "\n")
-  cat("Bounding box:\n")
-  print(x$bbox)
-  cat("\nKey-Value contigency table:\n")
-  print(x$keyval[seq(min(max.print, nrow(x$keyval))), ])
+  cat(print_header("osmar$nodes", x$n), "\n")
+  if ( x$n["nodes"] > 0 ) {
+    cat("\n")
+    cat(print_content("osmar$nodes", x$content), "\n")
+    cat("Bounding box:\n")
+    print(x$bbox)
+    cat("\nKey-Value contigency table:\n")
+    print(x$keyval[seq(min(max.print, nrow(x$keyval))), ])
+  }
+
+  invisible(x)
 }
+
 
 
 #' @S3method print nodes
@@ -154,16 +163,17 @@ print.nodes <- function(x, ...) {
   n <- c(nodes = nrow(x$attrs),
          tags = nrow(x$tags))
 
-  b <- cbind(lat = range(x$attrs$lat),
-             lon = range(x$attrs$lon))
-  rownames(b) <- c("min", "max")
-
-  cat(print_header("osmar$nodes", n), "\n\n")
-  print(b)
+  cat(print_header("osmar$nodes", n), "\n")
+  if ( n["nodes"] > 0 ) {
+    b <- cbind(lat = range(x$attrs$lat),
+               lon = range(x$attrs$lon))
+    rownames(b) <- c("min", "max")
+    cat("\n")
+    print(b)
+  }
 
   invisible(x)
 }
-
 
 
 
@@ -175,31 +185,34 @@ print.nodes <- function(x, ...) {
 #' @rdname summary.osmar
 #' @S3method summary ways
 summary.ways <- function(object, ...) {
-  ret <- list()
+  ret <- list(n = NULL, key = NULL, content = NULL,
+              val = NULL, keyval = NULL)
 
   ret$n <- c(ways = nrow(object$attrs),
              tags = nrow(object$tags),
              refs = nrow(object$refs))
 
-  ret$key <- sort(table(object$tags$k), decreasing = TRUE)
-  ret$key <- data.frame(Key = names(ret$key),
-                        Freq = unname(ret$key),
-                        stringsAsFactors = FALSE)
-  rownames(ret$key) <- NULL
+  if ( ret$n["ways"] > 0 ) {
+    ret$key <- sort(table(object$tags$k), decreasing = TRUE)
+    ret$key <- data.frame(Key = names(ret$key),
+                          Freq = unname(ret$key),
+                          stringsAsFactors = FALSE)
+    rownames(ret$key) <- NULL
 
-  ret$content <- sapply(object, names)
+    ret$content <- sapply(object, names)
 
-  ret$val <- sort(table(object$tags$v), decreasing = TRUE)
-  ret$val <- data.frame(Value = names(ret$val),
-                        Freq = unname(ret$val),
-                        stringsAsFactors = FALSE)
-  rownames(ret$val) <- NULL
+    ret$val <- sort(table(object$tags$v), decreasing = TRUE)
+    ret$val <- data.frame(Value = names(ret$val),
+                          Freq = unname(ret$val),
+                          stringsAsFactors = FALSE)
+    rownames(ret$val) <- NULL
 
-  ret$keyval <- as.data.frame(table(Key = object$tags$k,
-                                    Value = object$tags$v))
-  ret$keyval <- ret$keyval[ret$keyval$Freq > 0, ]
-  ret$keyval <- ret$keyval[order(-ret$keyval$Freq), ]
-  rownames(ret$keyval) <- NULL
+    ret$keyval <- as.data.frame(table(Key = object$tags$k,
+                                      Value = object$tags$v))
+    ret$keyval <- ret$keyval[ret$keyval$Freq > 0, ]
+    ret$keyval <- ret$keyval[order(-ret$keyval$Freq), ]
+    rownames(ret$keyval) <- NULL
+  }
 
   structure(ret, class = c("summary.ways", class(ret)))
 }
@@ -210,10 +223,14 @@ summary.ways <- function(object, ...) {
 #' @rdname summary.osmar
 #' @S3method print summary.ways
 print.summary.ways <- function(x, max.print = 10, ...) {
-  cat(print_header("osmar$ways", x$n), "\n\n")
-  cat(print_content("osmar$ways", x$content), "\n")
-  cat("Key-Value contigency table:\n")
-  print(x$keyval[seq(min(max.print, nrow(x$keyval))), ])
+  cat(print_header("osmar$ways", x$n), "\n")
+  if ( x$n["ways"] > 0 ) {
+    cat("\n")
+    cat(print_content("osmar$ways", x$content), "\n")
+    cat("Key-Value contigency table:\n")
+    print(x$keyval[seq(min(max.print, nrow(x$keyval))), ])
+  }
+  invisible(x)
 }
 
 
@@ -239,32 +256,35 @@ print.ways <- function(x, ...) {
 #' @rdname summary.osmar
 #' @S3method summary relations
 summary.relations <- function(object, ...) {
-  ret <- list()
+  ret <- list(n = NULL, key = NULL, content = NULL,
+              val = NULL, keyval = NULL)
 
   ret$n <- c(relations = nrow(object$attrs),
              tags = nrow(object$tags),
              node_refs = nrow(subset(object$refs, type == "node")),
              way_refs = nrow(subset(object$refs, type == "way")))
 
-  ret$key <- sort(table(object$tags$k), decreasing = TRUE)
-  ret$key <- data.frame(Key = names(ret$key),
-                        Freq = unname(ret$key),
-                        stringsAsFactors = FALSE)
-  rownames(ret$key) <- NULL
+  if ( ret$n["relations"] > 0 ) {
+    ret$key <- sort(table(object$tags$k), decreasing = TRUE)
+    ret$key <- data.frame(Key = names(ret$key),
+                          Freq = unname(ret$key),
+                          stringsAsFactors = FALSE)
+    rownames(ret$key) <- NULL
 
-  ret$content <- sapply(object, names)
+    ret$content <- sapply(object, names)
 
-  ret$val <- sort(table(object$tags$v), decreasing = TRUE)
-  ret$val <- data.frame(Value = names(ret$val),
-                        Freq = unname(ret$val),
-                        stringsAsFactors = FALSE)
-  rownames(ret$val) <- NULL
+    ret$val <- sort(table(object$tags$v), decreasing = TRUE)
+    ret$val <- data.frame(Value = names(ret$val),
+                          Freq = unname(ret$val),
+                          stringsAsFactors = FALSE)
+    rownames(ret$val) <- NULL
 
-  ret$keyval <- as.data.frame(table(Key = object$tags$k,
-                                    Value = object$tags$v))
-  ret$keyval <- ret$keyval[ret$keyval$Freq > 0, ]
-  ret$keyval <- ret$keyval[order(-ret$keyval$Freq), ]
-  rownames(ret$keyval) <- NULL
+    ret$keyval <- as.data.frame(table(Key = object$tags$k,
+                                      Value = object$tags$v))
+    ret$keyval <- ret$keyval[ret$keyval$Freq > 0, ]
+    ret$keyval <- ret$keyval[order(-ret$keyval$Freq), ]
+    rownames(ret$keyval) <- NULL
+  }
 
   structure(ret, class = c("summary.relations", class(ret)))
 }
@@ -275,10 +295,15 @@ summary.relations <- function(object, ...) {
 #' @rdname summary.osmar
 #' @S3method print summary.relations
 print.summary.relations <- function(x, max.print = 10, ...) {
-  cat(print_header("osmar$relations", x$n), "\n\n")
-  cat(print_content("osmar$relations", x$content), "\n")
-  cat("Key-Value contigency table:\n")
-  print(x$keyval[seq(min(max.print, nrow(x$keyval))), ])
+  cat(print_header("osmar$relations", x$n), "\n")
+  if ( x$n["relations"] > 0 ) {
+    cat("\n")
+    cat(print_content("osmar$relations", x$content), "\n")
+    cat("Key-Value contigency table:\n")
+    print(x$keyval[seq(min(max.print, nrow(x$keyval))), ])
+  }
+
+  invisible(x)
 }
 
 
@@ -293,7 +318,6 @@ print.relations <- function(x, ...) {
   cat(print_header("osmar$relations", n), "\n")
   invisible(x)
 }
-
 
 
 

@@ -12,7 +12,10 @@
 #'
 #' \describe{
 #'
-#'   \item{\code{compete_file}}{Dummy request element.}
+#'   \item{Dummy request element:}{Use the function
+#'     \code{compete_file} as dummy description for all elements
+#      available in the file.
+#'   }
 #'
 #' }
 #'
@@ -23,7 +26,9 @@
 #'   get_osm(complete_file(), source = osmsource_file("muc.osm"))
 #'   }
 #'
-#' @seealso \code{\link{get_osm}}, \code{\link{get_osm_elements}}
+#' @seealso \code{\link{get_osm}}, \code{\link{bbox}},
+#'   \code{\link{osm_descriptors}}
+#' @aliases complete_file
 #' @family osmsource
 #'
 #' @export
@@ -39,7 +44,6 @@ get_osm_data.osmfile <- function(source, what, ...) {
 
 
 
-#' @rdname osmsource_file
 #' @export
 complete_file <- function() {
   structure(c(from = 0, to = Inf), class = "complete_file")

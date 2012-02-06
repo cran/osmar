@@ -19,18 +19,36 @@
 #'
 #' \describe{
 #'
-#'   \item{Basic request elements}{See
-#'     \code{\link{get_osm_elements}}.}
+#'   \item{Bounding box:}{
 #'
-#'   \item{osmosis_args}{Special argument which enables to use osmosis
-#'     syntax.}
+#'     Use \code{\link{bbox}} or \code{\link{center_bbox}} to retrieve:
+#'
+#'     \itemize{
+#'
+#'       \item all nodes that are inside a given bounding box and any
+#'         relations that reference them;
+#'
+#'       \item all ways that reference at least one node that is
+#'         inside a given bounding box, any relations that reference
+#'         them [the ways], and any nodes outside the bounding box
+#'         that the ways may reference;
+#'
+#'       \item all relations that reference one of the nodes or ways
+#'         included due to the above rules (does not apply
+#'         recursively);
+#'     }
+#'
+#'  }
 #'
 #' }
 #'
 #' @param file The file name (and path) of the planet dump
 #' @param osmosis The path to the osmosis application
 #'
-#' @seealso \code{\link{get_osm}}, \code{\link{get_osm_elements}}
+#' @references
+#'   \url{http://wiki.openstreetmap.org/wiki/Osmosis}
+#' @seealso \code{\link{get_osm}}, \code{\link{bbox}},
+#'   \code{\link{osm_descriptors}}
 #' @family osmsource
 #'
 #' @export

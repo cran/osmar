@@ -1,4 +1,13 @@
 
+Changes in osmar version 1.1-1
+
+  o Workaround for a serious xmlClone-bug; thanks to Roger Bivand for
+    detecting the problem and Duncan Temple Lang for trying to
+    understand the problem.
+
+  o More documentation on element identifiers, osm sources, etc.
+
+
 Changes in osmar version 1.1
 
   o Refactored package; standalone osmar object, different OSM

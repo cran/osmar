@@ -12,15 +12,45 @@
 #' @section Supported request elements:
 #'
 #' \describe{
+#'   \item{Bounding box:}{
 #'
-#'   \item{Basic request elements}{See
-#'     \code{\link{get_osm_elements}}.}
+#'     Use \code{\link{bbox}} or \code{\link{center_bbox}} to retrieve:
+#'
+#'     \itemize{
+#'
+#'       \item all nodes that are inside a given bounding box and any
+#'         relations that reference them;
+#'
+#'       \item all ways that reference at least one node that is
+#'         inside a given bounding box, any relations that reference
+#'         them [the ways], and any nodes outside the bounding box
+#'         that the ways may reference;
+#'
+#'       \item all relations that reference one of the nodes or ways
+#'         included due to the above rules (does not apply
+#'         recursively);
+#'     }
+#'   }
+#'
+#'   \item{Basic request elements:}{
+#'     Use \code{\link[=osm_descriptors]{node}},
+#'     \code{\link[=osm_descriptors]{way}},
+#'     \code{\link[=osm_descriptors]{relation}} to retrieve an element
+#'     by its ID.
+#'
+#'     Use \code{full = TRUE} as additional argument to the
+#'     \code{\link{get_osm}} function to all other elements referenced
+#'     by it.
+#'   }
 #'
 #' }
 #'
 #' @param url URL of the API
 #'
-#' @seealso \code{\link{get_osm}}, \code{\link{get_osm_elements}}
+#' @references
+#'   \url{http://wiki.openstreetmap.org/wiki/API_v0.6}
+#' @seealso \code{\link{get_osm}}, \code{\link{bbox}},
+#'   \code{\link{osm_descriptors}}
 #' @family osmsource
 #'
 #' @export

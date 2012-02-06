@@ -4,8 +4,6 @@
 \title{OSM file data source}
 \usage{
   osmsource_file(file)
-
-  complete_file()
 }
 \arguments{
   \item{file}{The file name (and path) of the osm file}
@@ -16,7 +14,9 @@
 \section{Supported request elements}{
   \describe{
 
-  \item{\code{compete_file}}{Dummy request element.}
+  \item{Dummy request element:}{Use the function
+  \code{compete_file} as dummy description for all elements
+  }
 
   }
 }
@@ -26,7 +26,8 @@
   }
 }
 \seealso{
-  \code{\link{get_osm}}, \code{\link{get_osm_elements}}
+  \code{\link{get_osm}}, \code{\link{bbox}},
+  \code{\link{osm_descriptors}}
 
   Other osmsource: \code{\link{osmsource_api}},
   \code{\link{osmsource_osmosis}}
