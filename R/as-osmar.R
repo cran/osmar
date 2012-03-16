@@ -97,6 +97,11 @@ are_osmar <- function(objs) {
 #'
 #' @aliases osmar
 #'
+#' @examples
+#'   file <- system.file("extdata", "kaufstr.xml", package = "osmar")
+#'   raw <- readLines(file)
+#'   kaufstr <- as_osmar(xmlParse(raw))
+#'
 #' @export
 as_osmar <- function(xml) {
   #stopifnot(osm_check(xml))
@@ -125,5 +130,4 @@ as_osmar <- function(xml) {
 
   osmar_class(osmar)
 }
-
 

@@ -48,13 +48,11 @@
   }
 }
 \examples{
-\dontrun{
-    muc <- get_osm(center_bbox(11.575278, 48.137222, 200, 200))
-    o1 <- find(muc, way(tags(k == "highway" & v == "pedestrian")))
+data("muc", package = "osmar")
+  o1 <- find(muc, way(tags(k == "highway" & v == "pedestrian")))
 
-    find_down(muc, way(o1))
-    find_up(muc, way(o1))
-  }
+  find_down(muc, way(o1))
+  find_up(muc, way(o1))
 }
 \seealso{
   Other finding: \code{\link{find}},

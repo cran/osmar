@@ -26,8 +26,8 @@
 
   \item{Bounding box:}{
 
-  Use \code{\link{bbox}} or \code{\link{center_bbox}} to
-  retrieve:
+  Use \code{\link{corner_bbox}} or
+  \code{\link{center_bbox}} to retrieve:
 
   \itemize{
 
@@ -45,6 +45,25 @@
 
   }
 
+  }
+}
+\examples{
+\dontrun{
+    ## Download and extract a planet file:
+    download.file("http://osmar.r-forge.r-project.org/",
+                  "muenchen.osm.gz")
+    system("gzip -d muenchen.osm.gz")
+
+    ## Define osmosis source; note that we assume that
+    ## osmosis is in our path environment variable (if
+    ## not, set osmosis argument to the executable):
+    src <- osmsource_osmosis(file = "muenchen.osm")
+
+    ## Get the center of Munich:
+    muc_bbox <- center_bbox(11.575278, 48.137222,
+                            3000, 3000)
+    muc <- get_osm(muc_bbox, src)
+    muc
   }
 }
 \references{

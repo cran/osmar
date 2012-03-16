@@ -129,8 +129,10 @@ summary.nodes <- function(object, ...) {
 
     ret$keyval <- as.data.frame(table(Key = object$tags$k,
                                       Value = object$tags$v))
-    ret$keyval <- ret$keyval[ret$keyval$Freq > 0, ]
-    ret$keyval <- ret$keyval[order(-ret$keyval$Freq), ]
+    if ( length(ret$keyval$Freq) > 0 ){
+      ret$keyval <- ret$keyval[ret$keyval$Freq > 0, ]
+      ret$keyval <- ret$keyval[order(-ret$keyval$Freq), ]
+    }
     rownames(ret$keyval) <- NULL
   }
 
@@ -360,7 +362,9 @@ c.osmar <- function(...) {
 
   objects[[1]]$ways$attrs <- unique(c_parts("ways", "attrs"))
   objects[[1]]$ways$tags <- unique(c_parts("ways", "tags"))
-  objects[[1]]$ways$refs <- unique(c_parts("ways", "refs"))
+  #objects[[1]]$ways$refs <- unique(c_parts("ways", "refs"))
+  #  unique does make trouble with as_sp_polygons
+  objects[[1]]$ways$refs <- c_parts("ways", "refs")
 
   objects[[1]]$relations$attrs <- unique(c_parts("relations", "attrs"))
   objects[[1]]$relations$tags <- unique(c_parts("relations", "tags"))

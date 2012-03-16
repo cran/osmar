@@ -31,13 +31,11 @@
   Subset an osmar object
 }
 \examples{
-\dontrun{
-    muc <- get_osm(center_bbox(11.575278, 48.137222, 200, 200))
-    id <- find(muc, node(tags(v == "Marienplatz")))
+data("muc", package = "osmar")
+  id <- find(muc, node(tags(v == "Marienplatz")))
 
-    subset(muc, node_ids = id)
+  subset(muc, node_ids = id)
 
-    subset(muc, ids = find_up(muc, node(id)))
-  }
+  subset(muc, ids = find_up(muc, node(id)))
 }
 

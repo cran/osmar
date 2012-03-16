@@ -23,10 +23,11 @@
 #'   \dontrun{
 #'   api <- osmsource_api()
 #'
-#'   box <- bbox(11.579341, 48.15102, 11.582852, 48.1530)
+#'   box <- corner_bbox(11.579341, 48.15102, 11.582852, 48.1530)
 #'   gschw <- get_osm(box, source = api)
 #'
 #'   kaufstr <- get_osm(way(3810479))
+#'   kaufstr_full <- get_osm(way(3810479), full = TRUE)
 #'   }
 #'
 #' @seealso \code{\link{bbox}}, \code{\link{osm_descriptors}},
@@ -62,8 +63,13 @@ get_osm <- function(x, source = osmsource_api(), ...) {
 #'
 #' @seealso \code{\link{osm_descriptors}}, \code{\link{get_osm}}
 #'
+#' @aliases bbox
+#' @rdname bbox
+#' @family as_osmar_bbox
+#'
 #' @export
-bbox <- function(left, bottom, right, top) {
+corner_bbox <- function(left, bottom, right, top) {
+  ## TODO: check arguments
   structure(c(left = left, bottom = bottom,
               right = right, top = top), class = "bbox")
 }
@@ -102,14 +108,32 @@ center_bbox <- function(center_lon, center_lat, width, height) {
   if (right > 180)
     right <- right - 360
 
-  bbox(left, bottom, right, top)
+  corner_bbox(left, bottom, right, top)
 }
+
+
+
+#' Bounding box converter generic
+#'
+#' Generic function for implementing converters from various objects
+#' (e.g., \link[sp]{sp} \code{\link[sp]{Spatial}} objects) to osmar
+#' \code{\link{bbox}} objects.
+#'
+#' @param obj Object to compute osmar \code{\link{bbox}}
+#' @param ... Additional parameters for underlying functions
+#'
+#' @family as_osmar_bbox
+#'
+#' @export
+as_osmar_bbox <- function(obj, ...) {
+  UseMethod("as_osmar_bbox")
+}
+
 
 
 size <- function(x, ...) {
   UseMethod("size")
 }
-
 
 size.bbox <- function(x) {
   unname((x[1] - x[3]) * (x[2] - x[4]))

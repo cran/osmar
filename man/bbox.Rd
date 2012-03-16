@@ -1,9 +1,10 @@
-\name{bbox}
+\name{corner_bbox}
 \alias{bbox}
 \alias{center_bbox}
+\alias{corner_bbox}
 \title{Get OSM elements}
 \usage{
-  bbox(left, bottom, right, top)
+  corner_bbox(left, bottom, right, top)
 
   center_bbox(center_lon, center_lat, width, height)
 }
@@ -32,5 +33,8 @@
 }
 \seealso{
   \code{\link{osm_descriptors}}, \code{\link{get_osm}}
+
+  Other as_osmar_bbox: \code{\link{as_osmar_bbox}},
+  \code{\link{as_osmar_bbox.Spatial}}
 }
 

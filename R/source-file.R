@@ -23,7 +23,7 @@
 #'
 #' @examples
 #'   \dontrun{
-#'   get_osm(complete_file(), source = osmsource_file("muc.osm"))
+#'     get_osm(complete_file(), source = osmsource_file("muc.osm"))
 #'   }
 #'
 #' @seealso \code{\link{get_osm}}, \code{\link{bbox}},

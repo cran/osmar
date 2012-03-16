@@ -3,6 +3,16 @@
 
 
 
+has_data <- function(obj) {
+  ret <- as.logical(c(nrow(obj$nodes$attrs),
+                      nrow(obj$ways$attrs),
+                      nrow(obj$relations$attrs)))
+  names(ret) <- c("nodes", "ways", "relations")
+  ret
+}
+
+
+
 subset_nodes <- function(x, ids) {
   #x$attrs <- subset(x$attrs, id %in% ids)  # Subet should be in order of the ids
   x$attrs <- x$attrs[match(ids, x$attrs$id, nomatch=FALSE), ]
@@ -61,14 +71,12 @@ subset_relations <- function(x, ids) {
 #'   elements
 #'
 #' @examples
-#'   \dontrun{
-#'     muc <- get_osm(center_bbox(11.575278, 48.137222, 200, 200))
-#'     id <- find(muc, node(tags(v == "Marienplatz")))
+#'   data("muc", package = "osmar")
+#'   id <- find(muc, node(tags(v == "Marienplatz")))
 #'
-#'     subset(muc, node_ids = id)
+#'   subset(muc, node_ids = id)
 #'
-#'     subset(muc, ids = find_up(muc, node(id)))
-#'   }
+#'   subset(muc, ids = find_up(muc, node(id)))
 #'
 #' @method subset osmar
 #'

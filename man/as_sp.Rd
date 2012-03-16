@@ -54,11 +54,11 @@
   are stored in there.
 }
 \examples{
-\dontrun{
-    muc <- get_osm(center_bbox(11.575278, 48.137222, 200, 200))
-    muc_points <- as_sp(muc, "points")
-    muc_lines <- as_sp(muc, "lines")
-    muc_polygons <- as_sp(muc, "polygons")
-  }
+data("muc", package = "osmar")
+  muc_points <- as_sp(muc, "points")
+  muc_lines <- as_sp(muc, "lines")
+  muc_polygons <- as_sp(muc, "polygons")
+
+  bbox(muc_points)
 }
 

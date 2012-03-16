@@ -14,7 +14,8 @@
 #' \describe{
 #'   \item{Bounding box:}{
 #'
-#'     Use \code{\link{bbox}} or \code{\link{center_bbox}} to retrieve:
+#'     Use \code{\link{corner_bbox}} or \code{\link{center_bbox}} to
+#'     retrieve:
 #'
 #'     \itemize{
 #'
@@ -46,6 +47,17 @@
 #' }
 #'
 #' @param url URL of the API
+#'
+#' @examples
+#'   \dontrun{
+#'     api <- osmsource_api()
+#'
+#'     box <- corner_bbox(11.579341, 48.15102, 11.582852, 48.1530)
+#'     gschw <- get_osm(box, source = api)
+#'
+#'     kaufstr <- get_osm(way(3810479))
+#'     kaufstr_full <- get_osm(way(3810479), full = TRUE)
+#'   }
 #'
 #' @references
 #'   \url{http://wiki.openstreetmap.org/wiki/API_v0.6}

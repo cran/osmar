@@ -20,12 +20,10 @@
   with given conditions.
 }
 \examples{
-\dontrun{
-    muc <- get_osm(center_bbox(11.575278, 48.137222, 200, 200))
-    id <- find(muc, node(tags(v == "Marienplatz")))[1]
+data("muc", package = "osmar")
+  id <- find(muc, node(tags(v == "Marienplatz")))[1]
 
-    find_nearest_node(muc, id, way(tags(k == "highway" & v == "pedestrian")))
-  }
+  find_nearest_node(muc, id, way(tags(k == "highway" & v == "pedestrian")))
 }
 \seealso{
   Other finding: \code{\link{find}},

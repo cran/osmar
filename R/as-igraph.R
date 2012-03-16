@@ -1,3 +1,4 @@
+#' @include as-osmar.R
 #' @include osmar-plotting.R
 {}
 

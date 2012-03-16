@@ -1,4 +1,33 @@
 
+Changes in osmar version 1.1-3
+
+  o This is the FOSSGIS 2012 release!
+
+  o Fixed find_*.* bug; occured when calling one of these function
+    inside another function.
+
+  o Fixed bug in as_sp_lines and as_sp_polygons.
+
+
+Changes in osmar version 1.1-2
+
+  o A special thanks goes to Roger Bivand who is involved in most of
+    the fixes and improvements in this version!
+
+  o Added inst/extdata/kaufstr.xml and an example in ?as_osmar.
+
+  o Added muc.RData and removed \dontrun from most of the examples.
+
+  o Introduced as_osmar_bbox generic and as_osmar_bbox.Spatial.
+
+  o Renamed bbox function to corner_bbox function to avoid NAMESPACE
+    clashes with the sp package.
+
+  o c.osmar/unique bug resolved (unique removes closed ways).
+
+  o summary.nodes/no keyval bug resolved (problem if osmar$nodes does not have any tags)
+
+
 Changes in osmar version 1.1-1
 
   o Workaround for a serious xmlClone-bug; thanks to Roger Bivand for
