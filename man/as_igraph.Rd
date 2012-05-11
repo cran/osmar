@@ -1,6 +1,6 @@
 \name{as_igraph}
 \alias{as_igraph}
-\title{Convert osmar object to igraph}
+\title{Convert osmar object to igraph0}
 \usage{
   as_igraph(obj)
 }
@@ -8,10 +8,10 @@
   \item{obj}{An \code{\link{osmar}} object}
 }
 \value{
-  An \link[igraph]{igraph-package} \code{graph} object
+  An igraph0-package \code{graph} object
 }
 \description{
-  Convert an osmar object to an igraph (see
-  \link[igraph]{igraph-package}).
+  Convert an osmar object to an igraph0 (see
+  igraph0-package).
 }
 

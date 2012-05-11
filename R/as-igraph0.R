@@ -4,19 +4,19 @@
 
 
 
-#' Convert osmar object to igraph
+#' Convert osmar object to igraph0
 #'
-#' Convert an osmar object to an igraph (see
-#' \link[igraph]{igraph-package}).
+#' Convert an osmar object to an igraph0 (see
+#' igraph0-package).
 #'
 #' @param obj An \code{\link{osmar}} object
 #'
-#' @return An \link[igraph]{igraph-package} \code{graph} object
+#' @return An igraph0-package \code{graph} object
 #'
 #' @export
 as_igraph <- function(obj) {
   stopifnot(is_osmar(obj))
-  stopifnot(require("igraph"))
+  stopifnot(require("igraph0"))
 
   dat <- merge_ways_nodes(obj$ways[[3]], obj$nodes[[1]])
   dat <- split(dat, dat$id)
