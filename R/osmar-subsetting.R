@@ -18,7 +18,8 @@ subset_nodes <- function(x, ids) {
   x$attrs <- x$attrs[match(ids, x$attrs$id, nomatch=FALSE), ]
   x$attrs$user <- x$attrs$user[, drop = TRUE]
 
-  x$tags <- subset(x$tags, id %in% ids)
+  #x$tags <- subset(x$tags, id %in% ids)  # CMD check note: no visible binding
+  x$tags <- x$tags[x$tags$id %in% ids, ]
   x$tags$k <- droplevels(x$tags$k)
   x$tags$v <- droplevels(x$tags$v)
 
@@ -26,28 +27,34 @@ subset_nodes <- function(x, ids) {
 }
 
 subset_ways <- function(x, ids) {
-  x$attrs <- subset(x$attrs, id %in% ids)
+  #x$attrs <- subset(x$attrs, id %in% ids)  # CMD check note: no visible binding
+  x$attrs <- x$attrs[x$attrs$id %in% ids, ]
   x$attrs$user <- x$attrs$user[, drop = TRUE]
 
-  x$tags <- subset(x$tags, id %in% ids)
+  #x$tags <- subset(x$tags, id %in% ids)  # CMD check note: no visible binding
+  x$tags <- x$tags[x$tags$id %in% ids, ]
   x$tags$k <- droplevels(x$tags$k)
   x$tags$v <- droplevels(x$tags$v)
 
-  x$refs <- subset(x$refs, id %in% ids)
+  #x$refs <- subset(x$refs, id %in% ids)  # CMD check note: no visible binding
+  x$refs <- x$refs[x$refs$id %in% ids, ]
   #x$refs <- x$refs[match(ids, x$refs$id), ]
 
   x
 }
 
 subset_relations <- function(x, ids) {
-  x$attrs <- subset(x$attrs, id %in% ids)
+  #x$attrs <- subset(x$attrs, id %in% ids)  # CMD check note: no visible binding
+  x$attrs <- x$attrs[x$attrs$id %in% ids, ]
   x$attrs$user <- x$attrs$user[, drop = TRUE]
 
-  x$tags <- subset(x$tags, id %in% ids)
+  #x$tags <- subset(x$tags, id %in% ids)  # CMD check note: no visible binding
+  x$tags <- x$tags[x$tags$id %in% ids, ]
   x$tags$k <- droplevels(x$tags$k)
   x$tags$v <- droplevels(x$tags$v)
 
-  x$refs <- subset(x$refs, id %in% ids)
+  #x$refs <- subset(x$refs, id %in% ids)  # CMD check note: no visible binding
+  x$refs <- x$refs[x$refs$id %in% ids, ]
   x$refs$type <- droplevels(x$refs$type)
   x$refs$role <- droplevels(x$refs$role)
 

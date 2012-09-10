@@ -199,8 +199,10 @@ find_down_relation <- function(object, ids = NULL) {
 
   refs <- subset_relations(object$relations, ids)$refs
 
-  way_ids <- subset(refs, type == "way")$ref
-  node_ids <- subset(refs, type == "node")$ref
+  #way_ids <- subset(refs, type == "way")$ref  # CMD check note: no visible binding
+  way_ids <- refs[refs$type == "way", ]$ref
+  #node_ids <- subset(refs, type == "node")$ref  # CMD check note: no visible binding
+  node_ids <- refs[refs$type == "node", ]$ref
 
   ret <- find_down_way(object, way_ids)
   ret$node_ids <- c(ret$node_ids, node_ids)
@@ -237,8 +239,11 @@ find_up <- function(object, ids) {
 
 
 find_up_node <- function(object, ids = NULL) {
-  way_ids <- subset(object$ways$refs, ref %in% ids)$id
-  rel_ids <- subset(object$relations$refs, type == "node" & ref %in% ids)$id
+  #way_ids <- subset(object$ways$refs, ref %in% ids)$id  # CMD check note: no visible binding
+  way_ids <- object$ways$refs[object$ways$refs$ref %in% ids, ]$id
+  #rel_ids <- subset(object$relations$refs, type == "node" & ref %in% ids)$id  # CMD check note: no visible binding
+  rel_ids <- object$relations$refs[object$relations$refs$type == "node" &
+                                   object$relations$refs$ref %in% ids, ]$id
 
   list(node_ids = ids, way_ids = way_ids, relation_ids = rel_ids)
 }
@@ -246,7 +251,9 @@ find_up_node <- function(object, ids = NULL) {
 
 
 find_up_way <- function(object, ids = NULL) {
-  rel_ids <- subset(object$relations$refs, type == "way" & ref %in% ids)$id
+  #rel_ids <- subset(object$relations$refs, type == "way" & ref %in% ids)$id  # CMD check note: no visible binding
+  rel_ids <- object$relations$refs[object$relations$refs$type == "way" &
+                                   object$relations$refs$ref %in% ids, ]$id
   list(node_ids = NULL, way_ids = ids, relation_ids = rel_ids)
 }
 

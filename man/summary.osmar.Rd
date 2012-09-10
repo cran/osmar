@@ -11,20 +11,23 @@
 \usage{
   \method{summary}{osmar} (object, ...)
 
-  \method{print}{summary.osmar} (x, max.print = 3, ...)
+  \method{print}{summary.osmar} (x, max.print = 3,
+    nchar.value = 20, ...)
 
   \method{summary}{nodes} (object, ...)
 
-  \method{print}{summary.nodes} (x, max.print = 10, ...)
+  \method{print}{summary.nodes} (x, max.print = 10,
+    nchar.value = 20, ...)
 
   \method{summary}{ways} (object, ...)
 
-  \method{print}{summary.ways} (x, max.print = 10, ...)
+  \method{print}{summary.ways} (x, max.print = 10,
+    nchar.value = 20, ...)
 
   \method{summary}{relations} (object, ...)
 
   \method{print}{summary.relations} (x, max.print = 10,
-    ...)
+    nchar.value = 20, ...)
 }
 \arguments{
   \item{object}{An object (\code{osmar}, \code{nodes},
@@ -36,6 +39,9 @@
   \item{x}{The computed summary object to print}
 
   \item{max.print}{Maximum number of shown tags}
+
+  \item{nchar.value}{Number of shown characters of the
+  value column}
 }
 \value{
   \code{summary.osmar} returns a list with the summaries

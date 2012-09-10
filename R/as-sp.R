@@ -166,8 +166,10 @@ as_sp_lines <- function(obj, crs = osm_crs()){
 
 
 rels_ways_nodes2Line <- function(relID, rels, ways, nodes){
-  ref <- subset(rels$refs, id == relID)
-  wayref <- subset(ref, type == "way")$ref
+  #ref <- subset(rels$refs, id == relID)  # CMD check note: no visible binding
+  ref <- rels$refs[rels$refs$id == relID, ]
+  #wayref <- subset(ref, type == "way")$ref  # CMD check note: no visible binding
+  wayref <- ref[ref$type == "way", ]$ref
   wayln <-lapply(wayref, "ways_nodes2Line", ways, nodes)
 #  relref<- subset(ref, type=="relation")$ref
 #  falls ways der relations noch eingebaut werden sollen
@@ -178,7 +180,8 @@ rels_ways_nodes2Line <- function(relID, rels, ways, nodes){
 
 
 ways_nodes2Line <- function(wayID, ways, nodes){
-  nds <- subset(ways$refs, id==wayID)$ref
+  #nds <- subset(ways$refs, id==wayID)$ref  # CMD check note: no visible binding
+  nds <- ways$refs[ways$refs$id == wayID, ]$ref
   if ( length(nds) == 0) {
     return(NULL)
   }
@@ -251,7 +254,8 @@ as_sp_polygons <- function(obj, crs = osm_crs()){
 
 
 ways_nodes2Polygon <- function(wayID, ways, nodes){
-  nds <- subset(ways$refs, id==wayID)$ref
+  #nds <- subset(ways$refs, id==wayID)$ref  # CMD check note: no visible binding
+  nds <- ways$refs[ways$refs$id == wayID, ]$ref
   if(length(nds)==0)
     return(list(NULL))
 

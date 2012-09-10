@@ -37,9 +37,19 @@ merge_ways_nodes <- function(ways, nodes) {
 plot.osmar <- function(x,
                        way_args = list(col = gray(0.7)),
                        node_args = list(pch = 19, cex = 0.1, col = gray(0.3)), ...) {
+  n <- dim(x)
 
-  do.call(plot_ways, c(list(x), way_args))
-  do.call(plot_nodes, c(list(x, add = TRUE), node_args))
+  if ( n["nodes"] == 0 )
+    stop("Object without nodes.")
+
+  add <- FALSE
+
+  if ( n["ways"] > 0 ) {
+    do.call(plot_ways, c(list(x), way_args))
+    add <- TRUE
+  }
+
+  do.call(plot_nodes, c(list(x, add = add), node_args))
 }
 
 

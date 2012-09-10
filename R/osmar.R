@@ -20,6 +20,14 @@ print_content <- function(what, x) {
 
 
 
+abbrev <- function(x, nchar) {
+  if ( is.null(nchar) )
+    return(x)
+
+  ifelse(nchar(x) <= nchar, x, sprintf("%s...", substr(x, 1, nchar)))
+}
+
+
 
 #' Summarize osmar objects
 #'
@@ -70,25 +78,24 @@ summary.osmar <- function(object, ...) {
 
 #' @param x The computed summary object to print
 #' @param max.print Maximum number of shown tags
+#' @param nchar.value Number of shown characters of the value column
 #' @method print summary.osmar
 #' @rdname summary.osmar
 #' @S3method print summary.osmar
-print.summary.osmar <- function(x, max.print = 3, ...) {
+print.summary.osmar <- function(x, max.print = 3, nchar.value = 20, ...) {
   cat(print_header("osmar", x$n), "\n\n")
-  print(x$nodes, max.print)
+  print(x$nodes, max.print, nchar.value)
   cat("\n\n")
-  print(x$ways, max.print)
+  print(x$ways, max.print, nchar.value)
   cat("\n\n")
-  print(x$relations, max.print)
+  print(x$relations, max.print, nchar.value)
 }
 
 
 
 #' @S3method print osmar
 print.osmar <- function(x, ...) {
-  n <- sapply(x, function(y) nrow(y[[1]]))
-
-  cat(print_header("osmar", n), "\n")
+  cat(print_header("osmar", dim(x)), "\n")
   invisible(x)
 }
 
@@ -144,15 +151,17 @@ summary.nodes <- function(object, ...) {
 #' @method print summary.nodes
 #' @rdname summary.osmar
 #' @S3method print summary.nodes
-print.summary.nodes <- function(x, max.print = 10, ...) {
+print.summary.nodes <- function(x, max.print = 10, nchar.value = 20, ...) {
   cat(print_header("osmar$nodes", x$n), "\n")
   if ( x$n["nodes"] > 0 ) {
     cat("\n")
     cat(print_content("osmar$nodes", x$content), "\n")
     cat("Bounding box:\n")
     print(x$bbox)
-    cat("\nKey-Value contigency table:\n")
-    print(x$keyval[seq(min(max.print, nrow(x$keyval))), ])
+    cat("\nKey-Value contingency table:\n")
+    keyval <- x$keyval[seq(min(max.print, nrow(x$keyval))), ]
+    levels(keyval$Value) <- abbrev(levels(keyval$Value), nchar.value)
+    print(keyval)
   }
 
   invisible(x)
@@ -224,13 +233,15 @@ summary.ways <- function(object, ...) {
 #' @method print summary.ways
 #' @rdname summary.osmar
 #' @S3method print summary.ways
-print.summary.ways <- function(x, max.print = 10, ...) {
+print.summary.ways <- function(x, max.print = 10, nchar.value = 20, ...) {
   cat(print_header("osmar$ways", x$n), "\n")
   if ( x$n["ways"] > 0 ) {
     cat("\n")
     cat(print_content("osmar$ways", x$content), "\n")
-    cat("Key-Value contigency table:\n")
-    print(x$keyval[seq(min(max.print, nrow(x$keyval))), ])
+    cat("Key-Value contingency table:\n")
+    keyval <- x$keyval[seq(min(max.print, nrow(x$keyval))), ]
+    levels(keyval$Value) <- abbrev(levels(keyval$Value), nchar.value)
+    print(keyval)
   }
   invisible(x)
 }
@@ -263,8 +274,8 @@ summary.relations <- function(object, ...) {
 
   ret$n <- c(relations = nrow(object$attrs),
              tags = nrow(object$tags),
-             node_refs = nrow(subset(object$refs, type == "node")),
-             way_refs = nrow(subset(object$refs, type == "way")))
+             node_refs = sum(object$refs$type == "node"),
+             way_refs = sum(object$refs$type == "way"))
 
   if ( ret$n["relations"] > 0 ) {
     ret$key <- sort(table(object$tags$k), decreasing = TRUE)
@@ -296,13 +307,15 @@ summary.relations <- function(object, ...) {
 #' @method print summary.relations
 #' @rdname summary.osmar
 #' @S3method print summary.relations
-print.summary.relations <- function(x, max.print = 10, ...) {
+print.summary.relations <- function(x, max.print = 10, nchar.value = 20, ...) {
   cat(print_header("osmar$relations", x$n), "\n")
   if ( x$n["relations"] > 0 ) {
     cat("\n")
     cat(print_content("osmar$relations", x$content), "\n")
-    cat("Key-Value contigency table:\n")
-    print(x$keyval[seq(min(max.print, nrow(x$keyval))), ])
+    cat("Key-Value contingency table:\n")
+    keyval <- x$keyval[seq(min(max.print, nrow(x$keyval))), ]
+    levels(keyval$Value) <- abbrev(levels(keyval$Value), nchar.value)
+    print(keyval)
   }
 
   invisible(x)
@@ -314,8 +327,8 @@ print.summary.relations <- function(x, max.print = 10, ...) {
 print.relations <- function(x, ...) {
   n <- c(relations = nrow(x$attrs),
          tags = nrow(x$tags),
-         node_refs = nrow(subset(x$refs, type == "node")),
-         way_refs = nrow(subset(x$refs, type == "way")))
+         node_refs = sum(x$refs$type == "node"),
+         way_refs = sum(x$refs$type == "way"))
 
   cat(print_header("osmar$relations", n), "\n")
   invisible(x)
@@ -375,4 +388,25 @@ c.osmar <- function(...) {
 
 
 
+### Dimensions of osmar objects: ######################################
+
+#' Dimension of osmar objects
+#'
+#' @param x An \code{\link{osmar}} object
+#'
+#' @return
+#'   A named vector with the number of nodes, ways and relations.
+#'
+#' @examples
+#'   \dontrun{
+#'     muc <- get_osm(center_bbox(11.575278, 48.137222, 200, 200)
+#'     dim(muc)
+#'   }
+#'
+#' @method dim osmar
+#'
+#' @S3method dim osmar
+dim.osmar <- function(x) {
+  sapply(x, function(y) nrow(y[[1]]))
+}
 

@@ -40,8 +40,19 @@
 #'     by its ID.
 #'
 #'     Use \code{full = TRUE} as additional argument to the
-#'     \code{\link{get_osm}} function to all other elements referenced
-#'     by it.
+#'     \code{\link{get_osm}} function. This means that all members of
+#'     the specified elements are retrieved as well:
+#'
+#'     \itemize{
+#'
+#'       \item For a way, it will return the way specified plus all
+#'         nodes referenced by the way.
+#'
+#'       \item For a relation, it will return: (1) the relation itself;
+#'         (2) all nodes, ways, and relations that are members of the
+#'         relation; and (3) all nodes used by ways from the previous step.
+#'
+#'     }
 #'   }
 #'
 #' }
