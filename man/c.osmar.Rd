@@ -17,7 +17,7 @@
 }
 \examples{
 \dontrun{
-    muc <- get_osm(center_bbox(11.575278, 48.137222, 200, 200)
+    muc <- get_osm(center_bbox(11.575278, 48.137222, 200, 200))
     o1 <- subset(muc, node_ids = find(muc, node(tags(v == "Marienplatz"))))
     o2 <- subset(muc, ids = find_down(muc, way(c(96619179, 105071000))))
 

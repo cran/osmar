@@ -4,19 +4,25 @@
 
 
 
-#' Convert osmar object to igraph0
+#' Convert osmar object to igraph
 #'
-#' Convert an osmar object to an igraph0 (see
-#' igraph0-package).
+#' Convert an osmar object to an igraph (see
+#' igraph-package).
 #'
 #' @param obj An \code{\link{osmar}} object
 #'
-#' @return An igraph0-package \code{graph} object
+#' @return An igraph-package \code{graph} object
+#' 
+#' @examples
+#' file <- system.file("extdata", "kaufstr.xml", package = "osmar")
+#' raw <- readLines(file)
+#' kaufstr <- as_osmar(xmlParse(raw))
+#' kaufstrGraph <- as_igraph(kaufstr)
 #'
 #' @export
 as_igraph <- function(obj) {
   stopifnot(is_osmar(obj))
-  stopifnot(require("igraph0"))
+  stopifnot(require("igraph"))
 
   dat <- merge_ways_nodes(obj$ways[[3]], obj$nodes[[1]])
   dat <- split(dat, dat$id)

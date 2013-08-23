@@ -16,7 +16,7 @@
 }
 \examples{
 \dontrun{
-    muc <- get_osm(center_bbox(11.575278, 48.137222, 200, 200)
+    muc <- get_osm(center_bbox(11.575278, 48.137222, 200, 200))
     dim(muc)
   }
 }

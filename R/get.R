@@ -33,6 +33,11 @@
 #' @seealso \code{\link{bbox}}, \code{\link{osm_descriptors}},
 #'   \code{\link{osmsource_api}}, \code{\link{osmsource_osmosis}}
 #'
+#' @import RCurl 
+#' @import XML
+#' @import gtools
+#' @import methods
+#' 
 #' @export
 get_osm <- function(x, source = osmsource_api(), ...) {
   raw <- get_osm_data(source, x, ...)

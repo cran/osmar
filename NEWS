@@ -1,3 +1,7 @@
+Changes in osmar version 1.1-6
+
+  o Changed everything from "igraph0" to "igraph" because of cancellation of "igraph0-package
+
 Changes in osmar version 1.1-5
 
   o A special thanks goes to two anonymous reviewers and the editor
