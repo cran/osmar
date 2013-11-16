@@ -1,6 +1,15 @@
+Changes in osmar version 1.1-7
+
+  o A bug based on "gtools"" fixed, package "gtools" now not needed
+    anymore; thanks to Nikolaus Schantz and Dominik Kalisch for 
+    reporting the problems.
+
+
 Changes in osmar version 1.1-6
 
-  o Changed everything from "igraph0" to "igraph" because of cancellation of "igraph0-package
+  o Changed everything from "igraph0" to "igraph" because of cancellation 
+    of "igraph0"-package.
+
 
 Changes in osmar version 1.1-5
 

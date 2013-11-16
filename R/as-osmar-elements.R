@@ -28,12 +28,22 @@ extract_attr.node_parsed<- function(elparsed){
                       lat = numeric(),
                       lon = numeric()))
   }
-
-  if(any(sapply(ret, length)!=9)){
-    ret <- as.data.frame(do.call("smartbind", ret))
-  } else{
-    ret <- as.data.frame(do.call("rbind", ret))
-  }
+  
+  r0 <- structure(rep(NA_character_, 9),
+                  names = c("id", "visible", "timestamp", "version",
+                            "changeset", "user", "uid", "lat", "lon"))
+  ret <- lapply(ret,
+                function(r) {
+                  r2 <- r0
+                  r2[names(r)] <- unname(r)
+                  r2
+                })
+  
+  # if(any(sapply(ret, length)!=9)){
+  #   ret <- as.data.frame(do.call("smartbind", ret))
+  # } else{
+  ret <- as.data.frame(do.call("rbind", ret))
+  # }
 
   ret$timestamp <- strptime(ret$timestamp, format="%Y-%m-%dT%H:%M:%S")
   ret$lat<- as.numeric(as.character(ret$lat))
@@ -59,12 +69,23 @@ extract_attr.way_parsed <- function(elparsed){
                       user = factor(),
                       uid = factor()))
   }
+  
+  r0 <- structure(rep(NA_character_, 7),
+                  names = c("id", "visible", "timestamp", "version",
+                            "changeset", "user", "uid"))
+  ret <- lapply(ret,
+                function(r) {
+                  r2 <- r0
+                  r2[names(r)] <- unname(r)
+                  r2
+                })
+  
 
-  if(any(sapply(ret, length)!=7)){
-    ret<-as.data.frame(do.call("smartbind", ret))
-  } else{
-    ret<-as.data.frame(do.call("rbind", ret))
-  }
+  # if(any(sapply(ret, length)!=7)){
+  #  ret<-as.data.frame(do.call("smartbind", ret))
+  # } else{
+  ret<-as.data.frame(do.call("rbind", ret))
+  # }
 
   ret$timestamp <- strptime(ret$timestamp, format="%Y-%m-%dT%H:%M:%S")
   ret$id<- as.numeric(as.character(ret$id))

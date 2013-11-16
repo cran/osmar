@@ -10,7 +10,8 @@ merge_ways_nodes <- function(ways, nodes) {
   m <- match(ways$wref, nodes$nid)
 
   dat <- cbind(ways, nodes[m, ])
-  dat <- na.omit(dat)
+  # dat <- na.omit(dat)
+  dat <- dat[!is.na(dat$nlat), ]
 
   dat$nid <- NULL
   colnames(dat) <- substring(colnames(dat), 2)
